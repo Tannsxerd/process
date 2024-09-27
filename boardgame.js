@@ -1,3 +1,4 @@
+//chanaphat junpradub s6601012620020
 let ls;  
 let clickedCells = [];  
 let card1 = null;
