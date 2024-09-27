@@ -21,7 +21,7 @@ function setup() {
 function array2D(mode) {
   let arr = []; 
   let numb = [];  
-  for (let num = 0;num < mode*5/4;num++){
+  for (let num = 1;num < mode*5/4+1;num++){
     numb.push(num);
     numb.push(num);
     numb.push(num);
@@ -47,7 +47,7 @@ function mousePressed() {
   if (!canClick) return;  
 
   let clickPosition = getMousePosition();
-  let col = int(clickPosition.x / (width / 4));  // 4 columns
+  let col = int(clickPosition.x / (width / medium));  // 4 columns
   let row = int(clickPosition.y / (height / 5));  // 5 rows
 
   if (row >= 0 && row < 5 && col >= 0 && col < 4) {
@@ -106,7 +106,7 @@ function draw() {
   
   
   for (let row = 0; row < 5; row++) {
-    for (let col = 0; col < 4; col++) {
+    for (let col = 0; col < medium; col++) {
       stroke(255);
       noFill(); 
       rect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
@@ -117,6 +117,10 @@ function draw() {
   for (let i = 0; i < clickedCells.length; i++) {
     let cell = clickedCells[i];
     let num = ls[cell.row][cell.col];  
-    text(num, cell.col * cellWidth + cellWidth / 2, cell.row * cellHeight + cellHeight / 2); 
+    let position = 0;
+    for (let i=0;i<num;i++){
+     text("|", cell.col * cellWidth + cellWidth/ 2+position, cell.row * cellHeight + cellHeight / 2);
+     position += 10;
+    }
 }
 }
