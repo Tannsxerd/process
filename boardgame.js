@@ -1,23 +1,30 @@
 //chanaphat junpradub s6601012620020
+
 let ls;  
 let clickedCells = [];  
 let card1 = null;
 let card2 = null;
 let canClick = true;  
-
+const easy = 2;
+const medium =4;
+const hard = 8;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(100);
   let cellWidth = width / 4; 
   let cellHeight = height / 5;  
   console.log(cellWidth,cellHeight)
-  ls = array2D();  
+  ls = array2D(medium);  
+  console.log(ls);
 }
 
-function array2D() {
+function array2D(mode) {
   let arr = []; 
-  let numb = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];  
-
+  let numb = [];  
+  for (let num = 0;num < mode*5/2;num++){
+    numb.push(num);
+    numb.push(num);
+  }
 
   for (let row = 0; row < 5; row++) {
     arr[row] = [];  
@@ -53,7 +60,7 @@ function mousePressed() {
         clickedCells.push(cellClicked);
         canClick = false;  
        
-				
+        
         setTimeout(checkMatch, 1000);
       }
     }
@@ -68,7 +75,7 @@ function checkMatch() {
 
   
   card1 = null;
-	card2 = null;
+  card2 = null;
   canClick = true;  
 }
 
