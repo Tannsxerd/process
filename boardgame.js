@@ -21,7 +21,9 @@ function setup() {
 function array2D(mode) {
   let arr = []; 
   let numb = [];  
-  for (let num = 0;num < mode*5/2;num++){
+  for (let num = 0;num < mode*5/4;num++){
+    numb.push(num);
+    numb.push(num);
     numb.push(num);
     numb.push(num);
   }
