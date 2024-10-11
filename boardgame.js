@@ -3,6 +3,10 @@ let cur_player = "P_1";
 let match = true;
 let click_count = 0;
 let ls;  
+//hint po
+let hint_row = " ";
+let hint_col = " ";
+
 let clickedCells = [];  
 let card1 = null;
 let card2 = null;
@@ -13,6 +17,7 @@ const hard = 8;
 let color_wheel = ['red', 'green', 'blue', 'yellow'];
 let color_index = 0;
 function setup() {
+  console.log(ls);
   createCanvas(windowWidth, windowHeight);
   background(100);
   let cellWidth = width / 4; 
@@ -63,16 +68,20 @@ function mousePressed() {
       if (card1 === null) {
         card1 = ls[row][col];
         clickedCells.push(cellClicked);
+        hint(row,col);
       } else if (card2 === null) {
         card2 = ls[row][col];
         clickedCells.push(cellClicked);
         canClick = false;  
         cur_player = cur_player == "P_1" ? "P_2" : "P_1";
+        hint_row = " ";
+        hint_col = " ";
+        
         setTimeout(checkMatch, 1000);
       }
     }
   }
-  console.log(clickedCells)
+  console.log(clickedCells);
 }
 
 function checkMatch() {
@@ -87,6 +96,19 @@ function checkMatch() {
   canClick = true;  
 }
 
+function hint(row,col){
+  let number = ls[row][col];
+  for (let row = 0; row < 5; row++) {
+    for (let col = 0; col < 4; col++) {
+      if (ls[row][col] == number){
+        hint_row = row - 1;
+        hint_col = col -1;
+        break;
+      }
+      break;
+    }
+  }
+}
 function isCellClicked(cell) {
   // Check if the cell has already been clicked
   for (let i = 0; i < clickedCells.length; i++) {
@@ -112,8 +134,8 @@ function draw() {
   textAlign(CENTER, CENTER);
   textSize(32);
   fill(color_wheel[color_index]); 
-  
-   text(cur_player,windowWidth-50, windowHeight-50)
+  text("HINT:"+hint_row +","+hint_col,windowWidth-150, windowHeight-50);
+  text(cur_player,windowWidth-50, windowHeight-50)
   for (let row = 0; row < 5; row++) {
     for (let col = 0; col < medium; col++) {
       stroke(255);
