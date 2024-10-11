@@ -8,6 +8,8 @@ let canClick = true;
 const easy = 2;
 const medium =4;
 const hard = 8;
+let color_wheel = ['red', 'green', 'blue', 'yellow'];
+let color_index = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(100);
@@ -16,6 +18,9 @@ function setup() {
   console.log(cellWidth,cellHeight)
   ls = array2D(medium);  
   console.log(ls);
+  let button = createButton('click me');
+   button.position(windowWidth-50, windowHeight-50);
+   button.mousePressed(change_color);
 }
 
 function array2D(mode) {
@@ -90,7 +95,10 @@ function isCellClicked(cell) {
   }
   return false;
 }
-
+function change_color(){
+  color_index += 1;
+  color_index /=3;
+}
 function getMousePosition() {
   return { x: mouseX, y: mouseY };
 }
@@ -102,7 +110,7 @@ function draw() {
   let cellHeight = height / 5;  
   textAlign(CENTER, CENTER);
   textSize(32);
-  fill('#00ff00'); 
+  fill(color_wheel[color_index]); 
   
   
   for (let row = 0; row < 5; row++) {
