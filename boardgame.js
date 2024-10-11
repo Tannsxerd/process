@@ -1,7 +1,7 @@
 //chanaphat junpradub s6601012620020 multiplayer hint timer
 let cur_player = "P_1";
 let match = true;
-
+let click_count = 0;
 let ls;  
 let clickedCells = [];  
 let card1 = null;
@@ -67,6 +67,7 @@ function mousePressed() {
         card2 = ls[row][col];
         clickedCells.push(cellClicked);
         canClick = false;  
+        cur_player = cur_player == "P_1" ? "P_2" : "P_1";
         setTimeout(checkMatch, 1000);
       }
     }
@@ -77,19 +78,13 @@ function mousePressed() {
 function checkMatch() {
   if (card1 !== card2) {
     clickedCells.pop();  
-    clickedCells.pop();
-    card1 = null;
-    card2 = null;
-    canClick = true;  
-    
-  }else{
-    card1 = null;
-    card2 = null;
-    canClick = true;  
-    return true;
+    clickedCells.pop(); 
   }
 
   
+  card1 = null;
+  card2 = null;
+  canClick = true;  
 }
 
 function isCellClicked(cell) {
