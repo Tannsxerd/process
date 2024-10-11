@@ -16,8 +16,11 @@ const medium =4;
 const hard = 8;
 let color_wheel = ['red', 'green', 'blue', 'yellow'];
 let color_index = 0;
+let frame_count = 0;
 function setup() {
+  frameRate(1); 
   console.log(ls);
+  //console.log(time([1000]));
   createCanvas(windowWidth, windowHeight);
   background(100);
   let cellWidth = width / 4; 
@@ -128,14 +131,15 @@ function getMousePosition() {
 
 function draw() {
   background(100); 
-  
+  frame_count +=1;
+  text("time:"+frame_count,50,50);
   let cellWidth = width / 4; 
   let cellHeight = height / 5;  
   textAlign(CENTER, CENTER);
   textSize(32);
   fill(color_wheel[color_index]); 
-  text("HINT:"+hint_row +","+hint_col,windowWidth-150, windowHeight-50);
-  text(cur_player,windowWidth-50, windowHeight-50)
+  text("HINT:"+hint_row +","+hint_col,windowWidth-300, windowHeight-50);
+  text("Turn:"+cur_player,windowWidth-100, windowHeight-50)
   for (let row = 0; row < 5; row++) {
     for (let col = 0; col < medium; col++) {
       stroke(255);
