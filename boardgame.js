@@ -1,4 +1,6 @@
-//chanaphat junpradub s6601012620020
+//chanaphat junpradub s6601012620020 multiplayer hint timer
+let cur_player = "P_1";
+let match = true;
 
 let ls;  
 let clickedCells = [];  
@@ -19,7 +21,6 @@ function setup() {
   ls = array2D(medium);  
   console.log(ls);
   let button = createButton('click me');
-   button.position(windowWidth-50, windowHeight-50);
    button.mousePressed(change_color);
 }
 
@@ -49,7 +50,7 @@ function array2D(mode) {
 }
 
 function mousePressed() {
-  if (!canClick) return;  
+  if (!canClick){return;} 
 
   let clickPosition = getMousePosition();
   let col = int(clickPosition.x / (width / medium));  // 4 columns
@@ -66,24 +67,29 @@ function mousePressed() {
         card2 = ls[row][col];
         clickedCells.push(cellClicked);
         canClick = false;  
-       
-        
         setTimeout(checkMatch, 1000);
       }
     }
   }
+  console.log(clickedCells)
 }
 
 function checkMatch() {
   if (card1 !== card2) {
     clickedCells.pop();  
-    clickedCells.pop(); 
+    clickedCells.pop();
+    card1 = null;
+    card2 = null;
+    canClick = true;  
+    
+  }else{
+    card1 = null;
+    card2 = null;
+    canClick = true;  
+    return true;
   }
 
   
-  card1 = null;
-  card2 = null;
-  canClick = true;  
 }
 
 function isCellClicked(cell) {
@@ -112,7 +118,7 @@ function draw() {
   textSize(32);
   fill(color_wheel[color_index]); 
   
-  
+   text(cur_player,windowWidth-50, windowHeight-50)
   for (let row = 0; row < 5; row++) {
     for (let col = 0; col < medium; col++) {
       stroke(255);
